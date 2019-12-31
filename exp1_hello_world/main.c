@@ -1,7 +1,7 @@
 /**
  * file:    main.c
  * author:  wallying@foxmail.com
- * date:    2019-12-30
+ * date:    2019-12-31
  **/
 
 
@@ -56,30 +56,11 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmd, int iCmd
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    static int cxChar, cyChar;
-    static int cxClient, cyClient;
     HDC hdc;
     PAINTSTRUCT ps;
-    TEXTMETRIC tm;
     RECT rect;
 
-
     switch (msg) {
-    case WM_CREATE:
-        hdc = GetDC(hwnd);
-
-        GetTextMetrics(hdc, &tm);
-        cxChar = tm.tmAveCharWidth;
-        cyChar = tm.tmHeight + tm.tmExternalLeading;
-
-        ReleaseDC(hwnd, hdc);
-        break;
-
-    case WM_SIZE:
-        cxClient = LOWORD(lParam);
-        cyClient = HIWORD(lParam);
-        break;
-
     case WM_PAINT:
         hdc = BeginPaint(hwnd, &ps);
 
@@ -88,12 +69,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                  DT_SINGLELINE | DT_CENTER | DT_VCENTER);
 
         EndPaint(hwnd, &ps);
-        break;
-
-    case WM_VSCROLL:
-        break;
-
-    case WM_HSCROLL:
         break;
 
     case WM_DESTROY:
